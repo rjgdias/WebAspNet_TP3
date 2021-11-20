@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TP3.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista</h1>
+
+<p>
+    <a asp-action="CreateUser">Criar usuario novo</a>
+    @using (Html.BeginForm())
+    {
+    <p>
+        @Html.TextBox("SearchString") <br/> <br />
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter"/>
+    </p>
+
+}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sobrenome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sobrenome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    <a asp-action="AttUser" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="DelUser" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
